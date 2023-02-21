@@ -1,5 +1,6 @@
 
 Inimigo1:
+
 LDA $07C0   ; Não processa sprite 
 CMP #$01
 BNE +
@@ -47,7 +48,7 @@ sta $03C2           ; Starting tile #
 ++
 
 RTS
-;morreu
+
 morreu:
 
 ; Chama explosão
@@ -363,7 +364,7 @@ DEX
 BPL -
 
 REP #$20
-LDA #$0000   ; Direct page agora são os registros de DMA  
+LDA #$0000  
 TCD
 SEP #$20
 
