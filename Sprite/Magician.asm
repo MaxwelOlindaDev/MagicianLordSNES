@@ -589,7 +589,6 @@ SEP #$20
 ; DMA em 4 passos para completar um sprite com 32 pixels verticais
 ;======================
 
-;;Esquema do sparkster
 REP #$20
 LDA #$4300   ; Direct page agora são os registros de DMA  
 TCD
@@ -614,9 +613,9 @@ STA $04      ; Bank where our data is. (4304)
 LDY $0700,x
 STY $2116    ; Local da VRAM
 LDY $0710,x
-STY $02      ; Adress where our data is. (4302)
+STY $02      ; Endereço dos nossos dados. (4302)
 LDY $0720
-STY $05      ; Size of our data. (4305)
+STY $05      ; Tamanho dos nossos dados. (4305)
 LDA #$01
 STA $420B    ; Iniciar DMA canal 0
 DEX
@@ -626,7 +625,7 @@ BPL -
 LDX $0722    ; Registrar frame que foi feito DMA
 STX $0733
 ;LDA #$01
-;STA $0748  ;sinalizar que o sprite teve DMA nesse frame
+;STA $0748  ; sinalizar que o sprite teve DMA nesse frame
 ;BRA +
 Animeframerate:
 
