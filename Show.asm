@@ -1,13 +1,9 @@
 ;------------------------------------------------------------------------
 ;-  Escrito por Maxwel Olinda, aproveitando exemplos do Neviksti.
-;-  
-;-  Meu objetivo aqui é criar uma área de treinamento para programar em assembly.
-;-  Não tem nada muito avançado, a ideia é que você faça códigos e veja seus efeitos
-;-  na RAM ou nos registros.
+;- 
 ;-  A área "Action:" até "RTS" é onde você vai escrever seu código e brincar
 ;-  de ser programador de Super Nintendo.
-;-  A área "RodaUMAvez" até "RTS" rodará apenas uma vez. É bem útil.
-;-  Deixei lá vários exemplos de matemática com assembly.
+;-  A área "RodaUMAvez" até "RTS" rodará apenas uma vez.
 ;------------------------------------------------------------------------
 
 ;==============================================================================
@@ -124,7 +120,7 @@ JSR MagicianDMA
 	LDA #$38
 	TSB $0D9F   ;canais 3, 4, 5 para cada R,G,B. 
 
-
+;HDMA de cores para a BG3
 LDX #$0001
 SEP #$30
   LDA #$00
@@ -162,7 +158,7 @@ wai
 bra loop
 
 Corslot:
-;primeiro byte: line counter, segundo e terceiro byte: contagem de quantos valores ir adicionando 
+;primeiro byte: line counter / segundo e terceiro byte: contagem de quantos valores ir adicionando 
 
 .db $68, $80, $95
 .db $01, $02, $03,
@@ -185,9 +181,9 @@ Corslot:
 
 
 Corhdma:   ;16 bits
-;primeiro e segundo byte: line counter, terceiro e quarto byte: contagem de quantos valores ir adicionando 80 à 8F 
+;primeiro e segundo byte: line counter / terceiro e quarto byte: contagem de quantos valores ir adicionando de 80 à 8F 
 
-.db $68, $00, $00, $95 ;Setup ;Setup
+.db $68, $00, $00, $95 ;Setup
 .db $AD $45 $10 $56 $73 $5A
 
 .db $8C $41 $EF $51 $52 $56
@@ -202,7 +198,7 @@ Corhdma:   ;16 bits
 
 .db $08 $31 $6B $3D $AD $45
 
-.db $14, $00, $00, $83 ;Setup ;Setup
+.db $14, $00, $00, $83 ;Setup
 .db $2B $5A $12 $73 $76 $7B
 
 .db $00
@@ -688,7 +684,7 @@ stx $E3
 ;Reviver inimigo
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 lda $20
-and #$20  ;dividir frames
+and #$20 
 beq +
 STZ $07C0
 +
@@ -727,7 +723,7 @@ bmi +
 REP #$20
 inc BG1Hlow 
 SEP #$20
-dec $0380
+dec $0380   ;parar sprite de ir pra direita
 dec $0384
 +
 lda $0380
@@ -1048,7 +1044,7 @@ dmaCORESsprite2:
 
 
 
-;Muito grande esse aqui meo, precisa de um banco pra ele
+;Muito grande esse aqui meo, precisa de um banco pra ele.
 
 .BANK 2 SLOT 0
 .ORG 0
